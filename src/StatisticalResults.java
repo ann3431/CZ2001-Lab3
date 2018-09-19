@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class StatisticalResults
 {
 	private int arraySize;
@@ -10,7 +8,7 @@ public class StatisticalResults
 	{
 		this.arraySize = arraySize;
 		// if -1 shown for numOfKeyComparisons or cpuTime, obviously something is wrong
-		numOfKeyComparisons = -1;
+		numOfKeyComparisons = 0;
 		cpuTime = -1;
 	}
 	

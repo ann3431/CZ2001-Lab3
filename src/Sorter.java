@@ -4,7 +4,7 @@ public class Sorter
 	public static void insertionSort(int[] inputArray, StatisticalResults outputResult)
 	{
 		int temp; // holds value temporarily during a swap
-		int numOfKeyComparisons = 0;
+		int numOfKeyComparisons = outputResult.getNumOfKeyComparisons();
 		
 		long startTime = System.nanoTime(); // start timer
 		
@@ -32,9 +32,11 @@ public class Sorter
 	
 	public static void mergeSort(int[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)
 	{
+		int numOfKeyComparisons = outputResult.getNumOfKeyComparisons();
 		
 		long startTime = System.nanoTime(); // start timer
 		
+		++numOfKeyComparisons;
 		if(startIndex >= endIndex)
 		{
 			return;
@@ -51,7 +53,7 @@ public class Sorter
 		
 		long endTime = System.nanoTime(); // stop timer
 		
-		
+		outputResult.setNumOfKeyComparisons(outputResult.getNumOfKeyComparisons() + numOfKeyComparisons);
 		outputResult.setCPUTime(endTime - startTime);
 	}
 	
@@ -68,7 +70,7 @@ public class Sorter
 			int firstHead = startIndex;
 			int secondHead = (startIndex + endIndex)/2;
 			
-			while(firstHead < secondHead || secondHead < endIndex)
+			while(firstHead < (startIndex + endIndex)/2 && secondHead < endIndex)
 			{
 				if(inputArray[firstHead] < inputArray[secondHead])
 				{
@@ -83,9 +85,12 @@ public class Sorter
 				else
 				{
 					if(firstHead == (startIndex + endIndex)/2 - 1 && secondHead == endIndex)
+						break;
 					
 					mergedArray[mergedIndex] = inputArray[firstHead];
+					++firstHead;
 					mergedArray[mergedIndex+1] = inputArray[secondHead];
+					++secondHead;
 				}
 				
 				++mergedIndex;
