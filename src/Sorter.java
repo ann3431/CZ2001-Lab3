@@ -1,6 +1,17 @@
-
+/**
+ * This class does the sorting.
+ * 
+ * @author Jason
+ *
+ */
 public class Sorter
 {
+	/**
+	 * Insertion sort as shown in lecture.
+	 * 
+	 * @param inputArray
+	 * @param outputResult
+	 */
 	public static void insertionSort(int[] inputArray, StatisticalResults outputResult)
 	{
 		int temp; // holds value temporarily during a swap
@@ -30,6 +41,16 @@ public class Sorter
 		outputResult.setCPUTime(endTime - startTime);
 	}
 	
+	/**
+	 * Merge sort, but with auxiliary array instead of doing the merging in the original array.
+	 * Getting the right output is giving me a headache.
+	 * I suspected this has to do with shallow/deep-copying during passing of parameters/assignment of values for arrays.
+	 * 
+	 * @param inputArray
+	 * @param startIndex
+	 * @param endIndex
+	 * @param outputResult
+	 */
 	public static void mergeSort(int[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)
 	{
 		int numOfKeyComparisons = outputResult.getNumOfKeyComparisons();
@@ -59,33 +80,52 @@ public class Sorter
 	
 	private static void merge(int[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)
 	{
+		//IOHandler.printArray(inputArray);
+		
 		if(startIndex >= endIndex)
 		{
 			return;
 		}
 		else
 		{
+			//IOHandler.printArray(inputArray);
 			int[] mergedArray = new int[endIndex - startIndex + 1];
 			int mergedIndex = 0;
-			int firstHead = startIndex;
-			int secondHead = (startIndex + endIndex)/2;
 			
-			while(firstHead < (startIndex + endIndex)/2 && secondHead < endIndex)
+			int firstHead = startIndex;
+			//System.out.println("start index: " + firstHead);
+			int secondHead = (startIndex + endIndex)/2;
+			//System.out.println("end index: " + endIndex);
+			//System.out.println();
+			
+			//System.out.println(secondHead);
+			System.out.println("Entry 0");
+			while((firstHead < (startIndex + endIndex)/2) && secondHead < endIndex)
 			{
+				System.out.println("Entry 1");
 				if(inputArray[firstHead] < inputArray[secondHead])
 				{
+					System.out.println("Entry 2");
 					mergedArray[mergedIndex] = inputArray[firstHead];
 					++firstHead;
 				}
 				else if (inputArray[secondHead] < inputArray[firstHead])
 				{
+					System.out.println("Entry 3");
 					mergedArray[mergedIndex] = inputArray[secondHead];
+					//System.out.println("Input value: " + inputArray[firstHead]);
+					//System.out.println("Merged value: " + mergedArray[mergedIndex]);
 					++secondHead;
 				}
 				else
 				{
-					if(firstHead == (startIndex + endIndex)/2 - 1 && secondHead == endIndex)
+					System.out.println("Entry 4");
+					if((firstHead == ((startIndex + endIndex)/2 - 1)) && secondHead == endIndex)
+					{
+						// System.out.println("Here?");
 						break;
+					}
+						
 					
 					mergedArray[mergedIndex] = inputArray[firstHead];
 					++firstHead;
@@ -94,7 +134,9 @@ public class Sorter
 				}
 				
 				++mergedIndex;
+				//System.out.println(mergedArray[mergedIndex-1]);
 			}
+			//IOHandler.printArray(mergedArray);
 			
 			for(int offset = 0; offset < mergedArray.length; ++offset)
 			{

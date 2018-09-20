@@ -1,6 +1,15 @@
-
+/**
+ * This class actually runs the program and allow us to compare the performance
+ * of Insertion Sort vs Merge Sort
+ * @author Jason
+ *
+ */
 public class InsertionVersusMerge
 {
+	/**
+	 * this values are declared constants for easy manipulation
+	 * can be changed to console input later on
+	 */
 	private static final int MIN_ARRAY_SIZE = 1000;
 	private static final int MAX_ARRAY_SIZE = 1000_000;
 	private static final int STEP_SIZE = 1000;

@@ -9,7 +9,7 @@ public class ClassTester
 
 	public static void main(String[] args)
 	{
-		int arraySize = 1000;
+		int arraySize = 20;
 		
 		StatisticalResults outputResult = new StatisticalResults(arraySize);
 		int[] testArray = InputGenerator.generateDescendArray(arraySize);

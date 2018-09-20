@@ -1,3 +1,10 @@
+/**
+ * This class holds the results of sorting through an array,
+ * results being the number of key comparisons and CPU time taken for sorting
+ * 
+ * @author Jason
+ *
+ */
 public class StatisticalResults
 {
 	private int arraySize;
