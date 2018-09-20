@@ -6,7 +6,10 @@
  */
 public class ClassTester
 {
-
+	/**
+	 * This stuff here before adding them to the main program so you won't break things.
+	 * @param args
+	 */
 	public static void main(String[] args)
 	{
 		int arraySize = 20;

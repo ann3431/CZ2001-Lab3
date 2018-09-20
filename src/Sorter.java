@@ -41,8 +41,11 @@ public class Sorter
 		outputResult.setCPUTime(endTime - startTime);
 	}
 	
+	// for tracing
+	private static int mergeSortCallCount = 0;
+	private static int mergeCallCount = 0;
 	/**
-	 * Merge sort, but with auxiliary array instead of doing the merging in the original array.
+	 * Merge sort, but stores merge result in an auxiliary array instead of doing the merging in the original array.
 	 * Getting the right output is giving me a headache.
 	 * I suspected this has to do with shallow/deep-copying during passing of parameters/assignment of values for arrays.
 	 * 
@@ -53,6 +56,8 @@ public class Sorter
 	 */
 	public static void mergeSort(int[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)
 	{
+		++mergeSortCallCount;
+		System.out.println("MergeSort called " + mergeSortCallCount + " times");
 		int numOfKeyComparisons = outputResult.getNumOfKeyComparisons();
 		
 		long startTime = System.nanoTime(); // start timer
@@ -70,6 +75,8 @@ public class Sorter
 			mergeSort(inputArray,midIndex+1,endIndex,outputResult);
 		}
 		
+		
+		IOHandler.printArray(inputArray);
 		merge(inputArray,startIndex,endIndex,outputResult);
 		
 		long endTime = System.nanoTime(); // stop timer
@@ -80,7 +87,9 @@ public class Sorter
 	
 	private static void merge(int[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)
 	{
-		//IOHandler.printArray(inputArray);
+		++mergeCallCount;
+		IOHandler.printArray(inputArray);
+		System.out.println("Merge called " + mergeCallCount + " times");
 		
 		if(startIndex >= endIndex)
 		{
@@ -89,8 +98,9 @@ public class Sorter
 		else
 		{
 			//IOHandler.printArray(inputArray);
-			int[] mergedArray = new int[endIndex - startIndex + 1];
-			int mergedIndex = 0;
+			int[] auxiliaryArray = new int[endIndex - startIndex + 1];
+			System.out.println("Auxiliary array length: " + auxiliaryArray.length);
+			int auxiliaryIndex = 0;
 			
 			int firstHead = startIndex;
 			//System.out.println("start index: " + firstHead);
@@ -99,48 +109,53 @@ public class Sorter
 			//System.out.println();
 			
 			//System.out.println(secondHead);
-			System.out.println("Entry 0");
+			//System.out.println("Entry 0");
 			while((firstHead < (startIndex + endIndex)/2) && secondHead < endIndex)
 			{
-				System.out.println("Entry 1");
+				System.out.println("First head:" + firstHead + ", first head value: " + inputArray[firstHead]);
+				System.out.println("First tail: " + (startIndex + endIndex)/2);
+				System.out.println("Second head:" + secondHead + ", second head value: " + inputArray[secondHead]);
+				System.out.println("Second tail: " + endIndex);
+				System.out.println();
+				//System.out.println("Entry 1");
 				if(inputArray[firstHead] < inputArray[secondHead])
 				{
-					System.out.println("Entry 2");
-					mergedArray[mergedIndex] = inputArray[firstHead];
+					
+					auxiliaryArray[auxiliaryIndex] = inputArray[firstHead];
 					++firstHead;
 				}
 				else if (inputArray[secondHead] < inputArray[firstHead])
 				{
-					System.out.println("Entry 3");
-					mergedArray[mergedIndex] = inputArray[secondHead];
+					//System.out.println("Entry 3");
+					auxiliaryArray[auxiliaryIndex] = inputArray[secondHead];
 					//System.out.println("Input value: " + inputArray[firstHead]);
 					//System.out.println("Merged value: " + mergedArray[mergedIndex]);
 					++secondHead;
 				}
 				else
 				{
-					System.out.println("Entry 4");
+					//System.out.println("Entry 4");
 					if((firstHead == ((startIndex + endIndex)/2 - 1)) && secondHead == endIndex)
 					{
-						// System.out.println("Here?");
+						//System.out.println("Entry 5");
 						break;
 					}
 						
-					
-					mergedArray[mergedIndex] = inputArray[firstHead];
+					//System.out.println("Entry 6");
+					auxiliaryArray[auxiliaryIndex] = inputArray[firstHead];
 					++firstHead;
-					mergedArray[mergedIndex+1] = inputArray[secondHead];
+					auxiliaryArray[auxiliaryIndex+1] = inputArray[secondHead];
 					++secondHead;
 				}
 				
-				++mergedIndex;
+				++auxiliaryIndex;
 				//System.out.println(mergedArray[mergedIndex-1]);
 			}
 			//IOHandler.printArray(mergedArray);
 			
-			for(int offset = 0; offset < mergedArray.length; ++offset)
+			for(int offset = 0; offset < auxiliaryArray.length; ++offset)
 			{
-				inputArray[startIndex + offset] = mergedArray[offset];
+				inputArray[startIndex + offset] = auxiliaryArray[offset];
 			}
 		}
 	}
