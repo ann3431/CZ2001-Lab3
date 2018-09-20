@@ -2,4 +2,12 @@
 
 WIP
 
-lacking lots of comments right now, will add later
+JDK:
+1.8
+
+JRE:
+
+
+IDEs used: 
+Eclipse
+IntelliJ
