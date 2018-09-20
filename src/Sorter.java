@@ -46,8 +46,7 @@ public class Sorter
 //	private static int mergeCallCount = 0;
 	/**
 	 * Merge sort, but stores merge result in an auxiliary array instead of doing the merging in the original array.
-	 * Getting the right output is giving me a headache.
-	 * I suspected this has to do with shallow/deep-copying during passing of parameters/assignment of values for arrays.
+	 * Counter for numOfKeyComparisons not implemented properly
 	 * 
 	 * @param inputArray
 	 * @param startIndex
@@ -76,7 +75,7 @@ public class Sorter
 		}
 		
 		
-		IOHandler.printArray(inputArray);
+//		IOHandler.printArray(inputArray);
 		merge(inputArray,startIndex,endIndex,outputResult);
 		
 		long endTime = System.nanoTime(); // stop timer
