@@ -42,8 +42,8 @@ public class Sorter
 	}
 	
 	// for tracing
-	private static int mergeSortCallCount = 0;
-	private static int mergeCallCount = 0;
+//	private static int mergeSortCallCount = 0;
+//	private static int mergeCallCount = 0;
 	/**
 	 * Merge sort, but stores merge result in an auxiliary array instead of doing the merging in the original array.
 	 * Getting the right output is giving me a headache.
@@ -56,8 +56,8 @@ public class Sorter
 	 */
 	public static void mergeSort(int[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)
 	{
-		++mergeSortCallCount;
-		System.out.println("MergeSort called " + mergeSortCallCount + " times");
+//		++mergeSortCallCount;
+//		System.out.println("MergeSort called " + mergeSortCallCount + " times");
 		int numOfKeyComparisons = outputResult.getNumOfKeyComparisons();
 		
 		long startTime = System.nanoTime(); // start timer
@@ -87,9 +87,9 @@ public class Sorter
 	
 	private static void merge(int[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)
 	{
-		++mergeCallCount;
-		IOHandler.printArray(inputArray);
-		System.out.println("Merge called " + mergeCallCount + " times");
+//		++mergeCallCount;
+//		IOHandler.printArray(inputArray);
+//		System.out.println("Merge called " + mergeCallCount + " times");
 		
 		if(startIndex >= endIndex)
 		{
@@ -97,26 +97,43 @@ public class Sorter
 		}
 		else
 		{
-			//IOHandler.printArray(inputArray);
+//			IOHandler.printArray(inputArray);
 			int[] auxiliaryArray = new int[endIndex - startIndex + 1];
-			System.out.println("Auxiliary array length: " + auxiliaryArray.length);
+//			System.out.println("Auxiliary array length: " + auxiliaryArray.length);
 			int auxiliaryIndex = 0;
 			
-			int firstHead = startIndex;
-			//System.out.println("start index: " + firstHead);
-			int secondHead = (startIndex + endIndex)/2;
-			//System.out.println("end index: " + endIndex);
-			//System.out.println();
+//			System.out.print("Auxiliary array value before merge: ");
+//			for(int element: auxiliaryArray)
+//			{
+//				System.out.print(element + " ");
+//			}
+//			System.out.println();
+//			
+//			System.out.print("Values meant to be in auxiliary array after merge: ");
+//			for(int index = startIndex; index <= endIndex; ++index)
+//			{
+//				System.out.print(inputArray[index] + " ");
+//			}
+//			System.out.println();
 			
-			//System.out.println(secondHead);
+			int firstHead = startIndex;
+			int firstTail = (startIndex + endIndex)/2;
+//			System.out.println("first head: " + firstHead + ", first tail: " + firstTail);
+			
+			int secondHead = firstTail + 1;
+			int secondTail = endIndex;
+//			System.out.println("second head: " + secondHead + ", second tail: " + secondTail);
+//			System.out.println();
+			
+			
 			//System.out.println("Entry 0");
-			while((firstHead < (startIndex + endIndex)/2) && secondHead < endIndex)
+			while(firstHead <= firstTail && secondHead <= secondTail)
 			{
-				System.out.println("First head:" + firstHead + ", first head value: " + inputArray[firstHead]);
-				System.out.println("First tail: " + (startIndex + endIndex)/2);
-				System.out.println("Second head:" + secondHead + ", second head value: " + inputArray[secondHead]);
-				System.out.println("Second tail: " + endIndex);
-				System.out.println();
+//				System.out.println("First head:" + firstHead + ", first head value: " + inputArray[firstHead]);
+//				System.out.println("First tail: " + (startIndex + endIndex)/2);
+//				System.out.println("Second head:" + secondHead + ", second head value: " + inputArray[secondHead]);
+//				System.out.println("Second tail: " + endIndex);
+//				System.out.println();
 				//System.out.println("Entry 1");
 				if(inputArray[firstHead] < inputArray[secondHead])
 				{
@@ -135,7 +152,7 @@ public class Sorter
 				else
 				{
 					//System.out.println("Entry 4");
-					if((firstHead == ((startIndex + endIndex)/2 - 1)) && secondHead == endIndex)
+					if(firstHead == firstTail && secondHead == secondTail)
 					{
 						//System.out.println("Entry 5");
 						break;
@@ -144,14 +161,42 @@ public class Sorter
 					//System.out.println("Entry 6");
 					auxiliaryArray[auxiliaryIndex] = inputArray[firstHead];
 					++firstHead;
-					auxiliaryArray[auxiliaryIndex+1] = inputArray[secondHead];
+					//System.out.println("Entry 7");
+					++auxiliaryIndex;
+					auxiliaryArray[auxiliaryIndex] = inputArray[secondHead];
 					++secondHead;
 				}
 				
 				++auxiliaryIndex;
 				//System.out.println(mergedArray[mergedIndex-1]);
 			}
-			//IOHandler.printArray(mergedArray);
+			
+			/**
+			 * if there are any remaining elements to be merged, merge them
+			 */
+			if(firstHead <= firstTail)
+			{
+				for(int index = firstHead; index <= firstTail; ++index)
+				{
+					auxiliaryArray[auxiliaryIndex] = inputArray[index];
+					++auxiliaryIndex;
+				}
+			}
+			if(secondHead <= secondTail)
+			{
+				for(int index = secondHead; index <= secondTail; ++index)
+				{
+					auxiliaryArray[auxiliaryIndex] = inputArray[index];
+					++auxiliaryIndex;
+				}
+			}
+			
+//			System.out.print("Auxiliary array value after merge: ");
+//			for(int element: auxiliaryArray)
+//			{
+//				System.out.print(element + " ");
+//			}
+//			System.out.println();
 			
 			for(int offset = 0; offset < auxiliaryArray.length; ++offset)
 			{
