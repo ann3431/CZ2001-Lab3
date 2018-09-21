@@ -19,7 +19,7 @@ public class Sorter
 		int temp; // holds value temporarily during a swap
 //		int numOfKeyComparisons = outputResult.getNumOfKeyComparisons();
 		
-		BigInteger startTime = BigInteger.valueOf(System.nanoTime()); // start timer
+		BigInteger startTime = BigInteger.valueOf(System.nanoTime());
 		
 		for(int sortedIndex = 1; sortedIndex < inputArray.length; ++sortedIndex)
 		{
@@ -38,7 +38,7 @@ public class Sorter
 			}
 		}
 		
-		BigInteger endTime = BigInteger.valueOf(System.nanoTime()); // stop timer
+		BigInteger endTime = BigInteger.valueOf(System.nanoTime());
 		
 //		outputResult.setNumOfKeyComparisons(numOfKeyComparisons);
 		outputResult.setCPUTime(endTime.subtract(startTime));
