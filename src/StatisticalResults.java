@@ -10,14 +10,14 @@ import java.math.BigInteger;
 public class StatisticalResults
 {
 	private int arraySize;
-	private int numOfKeyComparisons;
+	private BigInteger numOfKeyComparisons;
 	private BigInteger cpuTime;
 	
 	public StatisticalResults(int arraySize)
 	{
 		this.arraySize = arraySize;
 		// if -1 shown for numOfKeyComparisons or cpuTime, obviously something is wrong
-		numOfKeyComparisons = 0;
+		numOfKeyComparisons = BigInteger.ZERO;
 		cpuTime = BigInteger.ZERO;
 	}
 	
@@ -30,13 +30,17 @@ public class StatisticalResults
 //		this.arraySize = arraySize;
 //	}
 	
-	public int getNumOfKeyComparisons()
+	public BigInteger getNumOfKeyComparisons()
 	{
 		return numOfKeyComparisons;
 	}
-	public void setNumOfKeyComparisons(int numOfKeyComparisons)
+	public void setNumOfKeyComparisons(BigInteger numOfKeyComparisons)
 	{
 		this.numOfKeyComparisons = numOfKeyComparisons;
+	}
+	public void incrementNumOfKeyComparisons()
+	{
+		numOfKeyComparisons = numOfKeyComparisons.add(BigInteger.ONE);
 	}
 	
 	public BigInteger getCPUTime()

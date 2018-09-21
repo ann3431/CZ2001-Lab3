@@ -27,44 +27,44 @@ public class InsertionVersusMerge
 		{
 			//StatisticalResults randomResults =   new StatisticalResults(arraySize);
 			//StatisticalResults insertAscendResults =   new StatisticalResults(arraySize);
-			//StatisticalResults insertDescendResults =   new StatisticalResults(arraySize);
+			StatisticalResults insertDescendResults =   new StatisticalResults(arraySize);
 			
-			StatisticalResults mergeAscendResults =   new StatisticalResults(arraySize);
+//			StatisticalResults mergeAscendResults =   new StatisticalResults(arraySize);
 //			StatisticalResults mergeDescendResults =   new StatisticalResults(arraySize);
 			
 			// to-do: place an inner loop here to get multiple instances of results to get the average
 			
 			//int[] randomArray = InputGenerator.generateRandomArray(arraySize);
 			//int[] insertAscendArray = InputGenerator.generateAscendArray(arraySize);
-			//int[] insertDescendArray = InputGenerator.generateDescendArray(arraySize);
+			int[] insertDescendArray = InputGenerator.generateDescendArray(arraySize);
 			
-			int[] mergeAscendArray = InputGenerator.generateAscendArray(arraySize);
+//			int[] mergeAscendArray = InputGenerator.generateAscendArray(arraySize);
 //			int[] mergeDescendArray = InputGenerator.generateDescendArray(arraySize);
 			
 			// counterbalancing to remove order effect
 			if(arraySize%2 == 0)
 			{
-				//Sorter.insertionSort(insertDescendArray, insertDescendResults);
+				Sorter.insertionSort(insertDescendArray, insertDescendResults);
 				//Sorter.insertionSort(insertAscendArray, insertAscendResults);
 				
 //				Sorter.mergeSort(mergeDescendArray, 0, arraySize-1, mergeDescendResults);
-				Sorter.mergeSort(mergeAscendArray, 0, arraySize-1, mergeAscendResults);
+//				Sorter.mergeSort(mergeAscendArray, 0, arraySize-1, mergeAscendResults);
 			}
 			else
 			{
 //				Sorter.mergeSort(mergeDescendArray, 0, arraySize-1, mergeDescendResults);
-				Sorter.mergeSort(mergeAscendArray, 0, arraySize-1, mergeAscendResults);
+//				Sorter.mergeSort(mergeAscendArray, 0, arraySize-1, mergeAscendResults);
 				
-				//Sorter.insertionSort(insertDescendArray, insertDescendResults);
+				Sorter.insertionSort(insertDescendArray, insertDescendResults);
 				//Sorter.insertionSort(insertAscendArray, insertAscendResults);
 			}
 			
-			//System.out.println("Insertion sort (descending): " + insertDescendResults);
+			System.out.println("Insertion sort (descending): " + insertDescendResults);
 //			System.out.println("Merge sort (descending): " + mergeDescendResults);
-//			System.out.println();
-			//System.out.println("Insertion sort (ascending): " + insertAscendResults);
-			System.out.println("Merge sort (ascending): " + mergeAscendResults);
 			System.out.println();
+			//System.out.println("Insertion sort (ascending): " + insertAscendResults);
+//			System.out.println("Merge sort (ascending): " + mergeAscendResults);
+//			System.out.println();
 		}
 	}
 

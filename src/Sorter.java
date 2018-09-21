@@ -17,7 +17,7 @@ public class Sorter
 	public static void insertionSort(int[] inputArray, StatisticalResults outputResult)
 	{
 		int temp; // holds value temporarily during a swap
-		int numOfKeyComparisons = outputResult.getNumOfKeyComparisons();
+//		int numOfKeyComparisons = outputResult.getNumOfKeyComparisons();
 		
 		BigInteger startTime = BigInteger.valueOf(System.nanoTime()); // start timer
 		
@@ -25,7 +25,8 @@ public class Sorter
 		{
 			for(int unsortedIndex = sortedIndex; unsortedIndex > 0; --unsortedIndex)
 			{
-				++numOfKeyComparisons; // the if statement below is the key comparison
+				outputResult.incrementNumOfKeyComparisons(); // the if statement below is the key comparison
+				
 				if(inputArray[unsortedIndex-1]>inputArray[unsortedIndex])
 				{
 					temp = inputArray[unsortedIndex-1];
@@ -39,7 +40,7 @@ public class Sorter
 		
 		BigInteger endTime = BigInteger.valueOf(System.nanoTime()); // stop timer
 		
-		outputResult.setNumOfKeyComparisons(numOfKeyComparisons);
+//		outputResult.setNumOfKeyComparisons(numOfKeyComparisons);
 		outputResult.setCPUTime(endTime.subtract(startTime));
 	}
 	
@@ -48,7 +49,9 @@ public class Sorter
 //	private static int mergeCallCount = 0;
 	/**
 	 * Merge sort, but stores merge result in an auxiliary array instead of doing the merging in the original array.
-	 * Counter for numOfKeyComparisons not implemented properly
+	 * 
+	 * mergeSort() or merge() not implemented properly.
+	 * Counter for numOfKeyComparisons not implemented properly.
 	 * 
 	 * @param inputArray
 	 * @param startIndex
@@ -59,11 +62,11 @@ public class Sorter
 	{
 //		++mergeSortCallCount;
 //		System.out.println("MergeSort called " + mergeSortCallCount + " times");
-		int numOfKeyComparisons = outputResult.getNumOfKeyComparisons();
+//		int numOfKeyComparisons = outputResult.getNumOfKeyComparisons();
 		
 		BigInteger startTime = BigInteger.valueOf(System.nanoTime()); // start timer
 		
-		++numOfKeyComparisons;
+//		++numOfKeyComparisons;
 		if(startIndex >= endIndex)
 		{
 			return;
@@ -82,7 +85,7 @@ public class Sorter
 		
 		BigInteger endTime = BigInteger.valueOf(System.nanoTime()); // stop timer
 		
-		outputResult.setNumOfKeyComparisons(outputResult.getNumOfKeyComparisons() + numOfKeyComparisons);
+//		outputResult.setNumOfKeyComparisons(outputResult.getNumOfKeyComparisons() + numOfKeyComparisons);
 		outputResult.setCPUTime(endTime.subtract(startTime));
 	}
 	
@@ -127,6 +130,7 @@ public class Sorter
 //			System.out.println();
 			
 			
+			
 			//System.out.println("Entry 0");
 			while(firstHead <= firstTail && secondHead <= secondTail)
 			{
@@ -136,6 +140,8 @@ public class Sorter
 //				System.out.println("Second tail: " + endIndex);
 //				System.out.println();
 				//System.out.println("Entry 1");
+				outputResult.incrementNumOfKeyComparisons();
+				
 				if(inputArray[firstHead] < inputArray[secondHead])
 				{
 					
