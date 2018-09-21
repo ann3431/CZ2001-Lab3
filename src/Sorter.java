@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+
 /**
  * This class does the sorting.
  * 
@@ -17,7 +19,7 @@ public class Sorter
 		int temp; // holds value temporarily during a swap
 		int numOfKeyComparisons = outputResult.getNumOfKeyComparisons();
 		
-		long startTime = System.nanoTime(); // start timer
+		BigInteger startTime = BigInteger.valueOf(System.nanoTime()); // start timer
 		
 		for(int sortedIndex = 1; sortedIndex < inputArray.length; ++sortedIndex)
 		{
@@ -35,10 +37,10 @@ public class Sorter
 			}
 		}
 		
-		long endTime = System.nanoTime(); // stop timer
+		BigInteger endTime = BigInteger.valueOf(System.nanoTime()); // stop timer
 		
 		outputResult.setNumOfKeyComparisons(numOfKeyComparisons);
-		outputResult.setCPUTime(endTime - startTime);
+		outputResult.setCPUTime(endTime.subtract(startTime));
 	}
 	
 	// for tracing
@@ -59,7 +61,7 @@ public class Sorter
 //		System.out.println("MergeSort called " + mergeSortCallCount + " times");
 		int numOfKeyComparisons = outputResult.getNumOfKeyComparisons();
 		
-		long startTime = System.nanoTime(); // start timer
+		BigInteger startTime = BigInteger.valueOf(System.nanoTime()); // start timer
 		
 		++numOfKeyComparisons;
 		if(startIndex >= endIndex)
@@ -78,10 +80,10 @@ public class Sorter
 //		IOHandler.printArray(inputArray);
 		merge(inputArray,startIndex,endIndex,outputResult);
 		
-		long endTime = System.nanoTime(); // stop timer
+		BigInteger endTime = BigInteger.valueOf(System.nanoTime()); // stop timer
 		
 		outputResult.setNumOfKeyComparisons(outputResult.getNumOfKeyComparisons() + numOfKeyComparisons);
-		outputResult.setCPUTime(endTime - startTime);
+		outputResult.setCPUTime(endTime.subtract(startTime));
 	}
 	
 	private static void merge(int[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)

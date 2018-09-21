@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+
 /**
  * This class holds the results of sorting through an array,
  * results being the number of key comparisons and CPU time taken for sorting
@@ -9,14 +11,14 @@ public class StatisticalResults
 {
 	private int arraySize;
 	private int numOfKeyComparisons;
-	private long cpuTime;
+	private BigInteger cpuTime;
 	
 	public StatisticalResults(int arraySize)
 	{
 		this.arraySize = arraySize;
 		// if -1 shown for numOfKeyComparisons or cpuTime, obviously something is wrong
 		numOfKeyComparisons = 0;
-		cpuTime = -1;
+		cpuTime = BigInteger.ZERO;
 	}
 	
 //	public int getArraySize()
@@ -37,11 +39,11 @@ public class StatisticalResults
 		this.numOfKeyComparisons = numOfKeyComparisons;
 	}
 	
-	public long getCPUTime()
+	public BigInteger getCPUTime()
 	{
 		return cpuTime;
 	}
-	public void setCPUTime(long cpuTime)
+	public void setCPUTime(BigInteger cpuTime)
 	{
 		this.cpuTime = cpuTime;
 	}
