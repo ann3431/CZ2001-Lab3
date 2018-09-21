@@ -1,4 +1,5 @@
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 /**
  * This class holds the results of sorting through an array,
@@ -10,15 +11,15 @@ import java.math.BigInteger;
 public class StatisticalResults
 {
 	private int arraySize;
-	private BigInteger numOfKeyComparisons;
-	private BigInteger cpuTime;
+	private long numOfKeyComparisons;
+	private long cpuTime;
 	
 	public StatisticalResults(int arraySize)
 	{
 		this.arraySize = arraySize;
 		// if -1 shown for numOfKeyComparisons or cpuTime, obviously something is wrong
-		numOfKeyComparisons = BigInteger.ZERO;
-		cpuTime = BigInteger.ZERO;
+		numOfKeyComparisons = 0;
+		cpuTime = 0;
 	}
 	
 //	public int getArraySize()
@@ -30,26 +31,51 @@ public class StatisticalResults
 //		this.arraySize = arraySize;
 //	}
 	
-	public BigInteger getNumOfKeyComparisons()
+	public long getNumOfKeyComparisons()
 	{
 		return numOfKeyComparisons;
 	}
-	public void setNumOfKeyComparisons(BigInteger numOfKeyComparisons)
+	public void setNumOfKeyComparisons(long numOfKeyComparisons)
 	{
 		this.numOfKeyComparisons = numOfKeyComparisons;
 	}
 	public void incrementNumOfKeyComparisons()
 	{
-		numOfKeyComparisons = numOfKeyComparisons.add(BigInteger.ONE);
+		++numOfKeyComparisons;
 	}
 	
-	public BigInteger getCPUTime()
+	public long getCPUTime()
 	{
 		return cpuTime;
 	}
-	public void setCPUTime(BigInteger cpuTime)
+	public void setCPUTime(long cpuTime)
 	{
 		this.cpuTime = cpuTime;
+	}
+	/**
+	 * Sets the average CPU Time for the sorting of a randomly-ordered array by
+	 * 1) taking in an ArrayList of Results sorted base on CPU Time (sorted using quickSort())
+	 * 2) removing the top and bottom 25% of results
+	 * 3) finding the average of the middle portion (remaining 50%)
+	 * 4) setting cpuTime to the average found
+	 * 
+	 * This average is also known as interquartile mean.
+	 * 
+	 * @param randomArrayResults
+	 */
+	public void setAverageCPUTime(ArrayList<StatisticalResults> randomResultsArray)
+	{
+		long totalCPUTime = 0;
+		
+		int TwentyFifthPercentilePosition = randomResultsArray.size()/4;
+		int SeventyFifthPercentilePosition = 3*TwentyFifthPercentilePosition;
+		
+		for(int index = TwentyFifthPercentilePosition; index < SeventyFifthPercentilePosition; ++index)
+		{
+			totalCPUTime += randomResultsArray.get(index).getCPUTime();
+		}
+		
+		this.cpuTime = totalCPUTime/(randomResultsArray.size()/2);
 	}
 	
 	public String toString()

@@ -1,4 +1,5 @@
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 /**
  * This class does the sorting.
@@ -17,9 +18,8 @@ public class Sorter
 	public static void insertionSort(int[] inputArray, StatisticalResults outputResult)
 	{
 		int temp; // holds value temporarily during a swap
-//		int numOfKeyComparisons = outputResult.getNumOfKeyComparisons();
 		
-		BigInteger startTime = BigInteger.valueOf(System.nanoTime());
+		long startTime = System.nanoTime();
 		
 		for(int sortedIndex = 1; sortedIndex < inputArray.length; ++sortedIndex)
 		{
@@ -38,15 +38,11 @@ public class Sorter
 			}
 		}
 		
-		BigInteger endTime = BigInteger.valueOf(System.nanoTime());
+		long endTime = System.nanoTime();
 		
-//		outputResult.setNumOfKeyComparisons(numOfKeyComparisons);
-		outputResult.setCPUTime(endTime.subtract(startTime));
+		outputResult.setCPUTime(endTime - startTime);
 	}
 	
-	// for tracing
-//	private static int mergeSortCallCount = 0;
-//	private static int mergeCallCount = 0;
 	/**
 	 * Merge sort, but stores merge result in an auxiliary array instead of doing the merging in the original array.
 	 * 
@@ -60,13 +56,8 @@ public class Sorter
 	 */
 	public static void mergeSort(int[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)
 	{
-//		++mergeSortCallCount;
-//		System.out.println("MergeSort called " + mergeSortCallCount + " times");
-//		int numOfKeyComparisons = outputResult.getNumOfKeyComparisons();
+		long startTime = System.nanoTime();
 		
-		BigInteger startTime = BigInteger.valueOf(System.nanoTime()); // start timer
-		
-//		++numOfKeyComparisons;
 		if(startIndex >= endIndex)
 		{
 			return;
@@ -79,21 +70,15 @@ public class Sorter
 			mergeSort(inputArray,midIndex+1,endIndex,outputResult);
 		}
 		
-		
-//		IOHandler.printArray(inputArray);
 		merge(inputArray,startIndex,endIndex,outputResult);
 		
-		BigInteger endTime = BigInteger.valueOf(System.nanoTime()); // stop timer
+		long endTime = System.nanoTime();
 		
-//		outputResult.setNumOfKeyComparisons(outputResult.getNumOfKeyComparisons() + numOfKeyComparisons);
-		outputResult.setCPUTime(endTime.subtract(startTime));
+		outputResult.setCPUTime(endTime - startTime);
 	}
 	
 	private static void merge(int[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)
 	{
-//		++mergeCallCount;
-//		IOHandler.printArray(inputArray);
-//		System.out.println("Merge called " + mergeCallCount + " times");
 		
 		if(startIndex >= endIndex)
 		{
@@ -101,81 +86,48 @@ public class Sorter
 		}
 		else
 		{
-//			IOHandler.printArray(inputArray);
 			int[] auxiliaryArray = new int[endIndex - startIndex + 1];
-//			System.out.println("Auxiliary array length: " + auxiliaryArray.length);
+
 			int auxiliaryIndex = 0;
-			
-//			System.out.print("Auxiliary array value before merge: ");
-//			for(int element: auxiliaryArray)
-//			{
-//				System.out.print(element + " ");
-//			}
-//			System.out.println();
-//			
-//			System.out.print("Values meant to be in auxiliary array after merge: ");
-//			for(int index = startIndex; index <= endIndex; ++index)
-//			{
-//				System.out.print(inputArray[index] + " ");
-//			}
-//			System.out.println();
 			
 			int firstHead = startIndex;
 			int firstTail = (startIndex + endIndex)/2;
-//			System.out.println("first head: " + firstHead + ", first tail: " + firstTail);
 			
 			int secondHead = firstTail + 1;
 			int secondTail = endIndex;
-//			System.out.println("second head: " + secondHead + ", second tail: " + secondTail);
-//			System.out.println();
-			
-			
-			
-			//System.out.println("Entry 0");
+
 			while(firstHead <= firstTail && secondHead <= secondTail)
 			{
-//				System.out.println("First head:" + firstHead + ", first head value: " + inputArray[firstHead]);
-//				System.out.println("First tail: " + (startIndex + endIndex)/2);
-//				System.out.println("Second head:" + secondHead + ", second head value: " + inputArray[secondHead]);
-//				System.out.println("Second tail: " + endIndex);
-//				System.out.println();
-				//System.out.println("Entry 1");
-				outputResult.incrementNumOfKeyComparisons();
+				outputResult.incrementNumOfKeyComparisons(); // if statement below is the key comparison
 				
 				if(inputArray[firstHead] < inputArray[secondHead])
 				{
-					
 					auxiliaryArray[auxiliaryIndex] = inputArray[firstHead];
 					++firstHead;
 				}
 				else if (inputArray[secondHead] < inputArray[firstHead])
 				{
-					//System.out.println("Entry 3");
 					auxiliaryArray[auxiliaryIndex] = inputArray[secondHead];
-					//System.out.println("Input value: " + inputArray[firstHead]);
-					//System.out.println("Merged value: " + mergedArray[mergedIndex]);
 					++secondHead;
 				}
 				else
 				{
-					//System.out.println("Entry 4");
+					// both sublists reach the end
 					if(firstHead == firstTail && secondHead == secondTail)
 					{
-						//System.out.println("Entry 5");
 						break;
 					}
-						
-					//System.out.println("Entry 6");
+					
 					auxiliaryArray[auxiliaryIndex] = inputArray[firstHead];
 					++firstHead;
-					//System.out.println("Entry 7");
+
 					++auxiliaryIndex;
+					
 					auxiliaryArray[auxiliaryIndex] = inputArray[secondHead];
 					++secondHead;
 				}
 				
 				++auxiliaryIndex;
-				//System.out.println(mergedArray[mergedIndex-1]);
 			}
 			
 			/**
@@ -198,17 +150,72 @@ public class Sorter
 				}
 			}
 			
-//			System.out.print("Auxiliary array value after merge: ");
-//			for(int element: auxiliaryArray)
-//			{
-//				System.out.print(element + " ");
-//			}
-//			System.out.println();
-			
+			// transfer values in auxiliary array (merge result) to the original array
 			for(int offset = 0; offset < auxiliaryArray.length; ++offset)
 			{
 				inputArray[startIndex + offset] = auxiliaryArray[offset];
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @param randomResultsArray
+	 * @param startIndex
+	 * @param endIndex
+	 */
+	public static void quickSort(ArrayList<StatisticalResults> randomResultsArray, int startIndex, int endIndex)
+	{	
+		if(startIndex >= endIndex)
+			return;
+		else
+		{
+			int pivotPosition = partition(randomResultsArray,startIndex,endIndex);
+			
+			quickSort(randomResultsArray,startIndex,pivotPosition-1);
+			quickSort(randomResultsArray,pivotPosition+1,endIndex);
+		}
+	}
+	
+	private static int partition(ArrayList<StatisticalResults> randomResultsArray, int startIndex, int endIndex)
+	{
+		int middleIndex = (startIndex + endIndex)/2;
+		
+		// swap(low,mid) in lecture notes
+		long temp = randomResultsArray.get(startIndex).getCPUTime();
+		randomResultsArray.get(startIndex).setCPUTime(randomResultsArray.get(middleIndex).getCPUTime());
+		randomResultsArray.get(middleIndex).setCPUTime(temp);
+		
+		long pivotValue = randomResultsArray.get(startIndex).getCPUTime();
+		int lastPositionSmallerThanPivot = startIndex;
+		
+		for(int index = startIndex + 1; index <= endIndex; ++index)
+		{
+			if(randomResultsArray.get(index).getCPUTime() < pivotValue)
+			{
+				++lastPositionSmallerThanPivot; // bring the increment out in case of context switch
+				
+				// swap(last_small,i) in lecture notes (excluding increment of last_small)
+				temp = randomResultsArray.get(lastPositionSmallerThanPivot).getCPUTime();
+				
+				randomResultsArray.get(lastPositionSmallerThanPivot).
+					setCPUTime(randomResultsArray.get(index).getCPUTime());
+				
+				randomResultsArray.get(index).setCPUTime(temp);
+				
+			}
+		}
+		
+		// swap(low,last_small) in lecture notes
+		temp = randomResultsArray.get(startIndex).getCPUTime();
+		
+		randomResultsArray.get(startIndex).setCPUTime(randomResultsArray.
+				get(lastPositionSmallerThanPivot).getCPUTime());
+		
+		randomResultsArray.get(lastPositionSmallerThanPivot).setCPUTime(temp);
+		
+		return lastPositionSmallerThanPivot;
+	}
+	
+	// i should write a swap() method
 }

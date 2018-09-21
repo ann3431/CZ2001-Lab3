@@ -1,7 +1,7 @@
 /**
  * This class actually runs the program and allow us to compare the performance
  * of Insertion Sort vs Merge Sort
- * @author Jason
+ * @author Annie, Jason, Kenrick, Lewis, Stephen
  *
  */
 public class InsertionVersusMerge

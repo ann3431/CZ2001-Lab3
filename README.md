@@ -1,6 +1,6 @@
 # CZ2001Lab3SE1Group2
 
-WIP
+~Work in Progress~
 
 JDK:
 1.8
@@ -9,5 +9,5 @@ JRE:
 
 
 IDEs used: 
-Eclipse
+Eclipse Oxygen
 IntelliJ
