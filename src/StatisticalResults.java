@@ -17,7 +17,6 @@ public class StatisticalResults
 	public StatisticalResults(int arraySize)
 	{
 		this.arraySize = arraySize;
-		// if -1 shown for numOfKeyComparisons or cpuTime, obviously something is wrong
 		numOfKeyComparisons = 0;
 		cpuTime = 0;
 	}
