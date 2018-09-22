@@ -2,7 +2,15 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/jason/Documents/NTU/Academic/1 SCSE/Year_2_Semester_1/CZ2001 Algorithms/3 Labs/Lab 3/CZ2001Lab3SE1Group2/JARs/commons-collections4-4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jason/Documents/NTU/Academic/1 SCSE/Year_2_Semester_1/CZ2001 Algorithms/3 Labs/Lab 3/CZ2001Lab3SE1Group2/JARs/commons-collections4-4.1-javadoc.jar"/>
 	<classpathentry kind="lib" path="C:/Users/jason/Documents/NTU/Academic/1 SCSE/Year_2_Semester_1/CZ2001 Algorithms/3 Labs/Lab 3/CZ2001Lab3SE1Group2/JARs/commons-csv-1.5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/jason/Documents/NTU/Academic/1 SCSE/Year_2_Semester_1/CZ2001 Algorithms/3 Labs/Lab 3/CZ2001Lab3SE1Group2/JARs/commons-csv-1.5-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jason/Documents/NTU/Academic/1 SCSE/Year_2_Semester_1/CZ2001 Algorithms/3 Labs/Lab 3/CZ2001Lab3SE1Group2/JARs/curvesapi-1.04.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jason/Documents/NTU/Academic/1 SCSE/Year_2_Semester_1/CZ2001 Algorithms/3 Labs/Lab 3/CZ2001Lab3SE1Group2/JARs/poi-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jason/Documents/NTU/Academic/1 SCSE/Year_2_Semester_1/CZ2001 Algorithms/3 Labs/Lab 3/CZ2001Lab3SE1Group2/JARs/poi-ooxml-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jason/Documents/NTU/Academic/1 SCSE/Year_2_Semester_1/CZ2001 Algorithms/3 Labs/Lab 3/CZ2001Lab3SE1Group2/JARs/poi-ooxml-schemas-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jason/Documents/NTU/Academic/1 SCSE/Year_2_Semester_1/CZ2001 Algorithms/3 Labs/Lab 3/CZ2001Lab3SE1Group2/JARs/poi-scratchpad-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jason/Documents/NTU/Academic/1 SCSE/Year_2_Semester_1/CZ2001 Algorithms/3 Labs/Lab 3/CZ2001Lab3SE1Group2/JARs/xmlbeans-2.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
