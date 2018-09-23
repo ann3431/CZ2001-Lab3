@@ -15,7 +15,7 @@ public class InputGenerator
 	 */
 	
 	//Option 1: Using ArrayList object to store integer elements
-	public static int[] generateRandomArray(int arraySize)
+	public static ArrayList<Integer> generateRandomArray1(int arraySize)
 	{
 		ArrayList<Integer> inputArrayList = new ArrayList<Integer>(arraySize);
 		
@@ -30,7 +30,7 @@ public class InputGenerator
 	}
 	
 	//Option 2: Using normal Array object to store integer elements
-	public int[] generateRandomArray2(int arraySize){
+	public static int[] generateRandomArray2(int arraySize){
         //    Create an Array object to store the integer elements
         int [] inputArray = new int[arraySize];
 
