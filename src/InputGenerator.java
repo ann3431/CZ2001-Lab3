@@ -13,13 +13,48 @@ public class InputGenerator
 	 * @param arraySize
 	 * @return
 	 */
+	
+	//Option 1: Using ArrayList object to store integer elements
 	public static int[] generateRandomArray(int arraySize)
 	{
-		int[] inputArray = new int[arraySize];
-		// Lewis, add your code for random array here
+		ArrayList<Integer> inputArrayList = new ArrayList<Integer>(arraySize);
 		
-		return inputArray;
+		for (int index = 0; index < arraySize; index++)
+		{
+			inputArrayList.add(i+1);
+		}
+		
+		Collections.shuffle(inputArrayList);
+		
+		return inputArrayList;
 	}
+	
+	//Option 2: Using normal Array object to store integer elements
+	public int[] generateRandomArray2(int arraySize){
+        //    Create an Array object to store the integer elements
+        int [] inputArray = new int[arraySize];
+
+        for(int index = 0; index < size; index++){
+            inputArray[index] = index + 1;
+        }
+
+        //    Generate randomly ordered array by implementing Fisher-Yates shuffle algorithm
+        int index;
+        Random random = new Random();
+
+        for(int i = inputArray.length - 1; i > 0; i--){
+            index = random.nextInt(i + 1);
+            
+            if(index != i){
+                inputArray[index] ^= inputArray[i];
+                inputArray[i] ^= inputArray[index];
+                inputArray[index] ^= inputArray[i];
+            }
+
+        }
+        return inputArray;
+    }
+	
 	
 	/**
 	 * This method generates an array sorted in ascending order.
