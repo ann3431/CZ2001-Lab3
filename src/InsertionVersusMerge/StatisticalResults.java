@@ -53,8 +53,9 @@ public class StatisticalResults
 	{
 		this.cpuTime = cpuTime;
 	}
+	
 	/**
-	 * Sets the average CPU Time for the sorting of a randomly-ordered array by
+	 * This method sets the average CPU Time for the sorting of a randomly-ordered array by
 	 * 1) taking in an ArrayList of Results sorted base on CPU Time (sorted using quickSort())
 	 * 2) removing the top and bottom 25% of results
 	 * 3) finding the average of the middle portion (remaining 50%)
@@ -64,19 +65,19 @@ public class StatisticalResults
 	 * 
 	 * @param randomArrayResults
 	 */
-	public void setAverageCPUTime(ArrayList<StatisticalResults> randomResultsArray)
+	public void setAverageCPUTime(StatisticalResults[] randomResultsArray)
 	{
 		long totalCPUTime = 0;
 		
-		int TwentyFifthPercentilePosition = randomResultsArray.size()/4;
+		int TwentyFifthPercentilePosition = randomResultsArray.length/4;
 		int SeventyFifthPercentilePosition = 3*TwentyFifthPercentilePosition;
 		
 		for(int index = TwentyFifthPercentilePosition; index < SeventyFifthPercentilePosition; ++index)
 		{
-			totalCPUTime += randomResultsArray.get(index).getCPUTime();
+			totalCPUTime += randomResultsArray[index].getCPUTime();
 		}
 		
-		this.cpuTime = totalCPUTime/(randomResultsArray.size()/2);
+		this.cpuTime = totalCPUTime/(randomResultsArray.length/2);
 	}
 	
 	public String toString()

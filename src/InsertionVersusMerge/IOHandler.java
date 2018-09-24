@@ -21,6 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class IOHandler
 {
 	// This method prints out large arrays (arraySize >= 10) to the console in a nice format
+	// Let us check if the array is sorted correctly
 	public static void printArray(int[] array)
 	{
 		System.out.println("-----Start of Array-----");
@@ -35,9 +36,7 @@ public class IOHandler
 	
 	/**
 	 * This method generates a new XSSF WorkBook.
-	 * Sheets within a WorkBook store results of sorting through arrays of random, ascending and descending order.
-	 * 
-	 * In each sheet, there are 3 columns that record the array size, number of key comparisons and CPU time.
+	 * In each Workbook, there are 3 columns that record the array size, number of key comparisons and CPU time.
 	 * 
 	 * @param fileName
 	 * @return 
@@ -123,6 +122,7 @@ public class IOHandler
 		resultsSheet.autoSizeColumn(1);
 		resultsSheet.autoSizeColumn(2);
 		
+		// actual transfer of output data
 		File fileOut = new File(fileName);
 		FileOutputStream fileOutStream = new FileOutputStream(fileOut);
 		resultsWorkbook.write(fileOutStream);

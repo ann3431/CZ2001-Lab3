@@ -47,9 +47,6 @@ public class Sorter
 	/**
 	 * Merge sort, but stores merge result in an auxiliary array instead of doing the merging in the original array.
 	 * 
-	 * mergeSort() or merge() not implemented properly.
-	 * Counter for numOfKeyComparisons not implemented properly.
-	 * 
 	 * @param inputArray
 	 * @param startIndex
 	 * @param endIndex
@@ -160,12 +157,13 @@ public class Sorter
 	}
 	
 	/**
+	 * This method is used for sorting results of sorting through randomly-ordered array.
 	 * 
 	 * @param randomResultsArray
 	 * @param startIndex
 	 * @param endIndex
 	 */
-	public static void quickSort(ArrayList<StatisticalResults> randomResultsArray, int startIndex, int endIndex)
+	public static void quickSort(StatisticalResults[] randomResultsArray, int startIndex, int endIndex)
 	{	
 		if(startIndex >= endIndex)
 			return;
@@ -178,42 +176,40 @@ public class Sorter
 		}
 	}
 	
-	private static int partition(ArrayList<StatisticalResults> randomResultsArray, int startIndex, int endIndex)
+	private static int partition(StatisticalResults[] randomResultsArray, int startIndex, int endIndex)
 	{
 		int middleIndex = (startIndex + endIndex)/2;
 		
 		// swap(low,mid) in lecture notes
-		long temp = randomResultsArray.get(startIndex).getCPUTime();
-		randomResultsArray.get(startIndex).setCPUTime(randomResultsArray.get(middleIndex).getCPUTime());
-		randomResultsArray.get(middleIndex).setCPUTime(temp);
+		long temp = randomResultsArray[startIndex].getCPUTime();
+		randomResultsArray[startIndex].setCPUTime(randomResultsArray[middleIndex].getCPUTime());
+		randomResultsArray[middleIndex].setCPUTime(temp);
 		
-		long pivotValue = randomResultsArray.get(startIndex).getCPUTime();
+		long pivotValue = randomResultsArray[startIndex].getCPUTime();
 		int lastPositionSmallerThanPivot = startIndex;
 		
 		for(int index = startIndex + 1; index <= endIndex; ++index)
 		{
-			if(randomResultsArray.get(index).getCPUTime() < pivotValue)
+			if(randomResultsArray[index].getCPUTime() < pivotValue)
 			{
 				++lastPositionSmallerThanPivot; // bring the increment out in case of context switch
 				
 				// swap(last_small,i) in lecture notes (excluding increment of last_small)
-				temp = randomResultsArray.get(lastPositionSmallerThanPivot).getCPUTime();
+				temp = randomResultsArray[lastPositionSmallerThanPivot].getCPUTime();
 				
-				randomResultsArray.get(lastPositionSmallerThanPivot).
-					setCPUTime(randomResultsArray.get(index).getCPUTime());
+				randomResultsArray[lastPositionSmallerThanPivot].setCPUTime(randomResultsArray[index].getCPUTime());
 				
-				randomResultsArray.get(index).setCPUTime(temp);
+				randomResultsArray[index].setCPUTime(temp);
 				
 			}
 		}
 		
 		// swap(low,last_small) in lecture notes
-		temp = randomResultsArray.get(startIndex).getCPUTime();
+		temp = randomResultsArray[startIndex].getCPUTime();
 		
-		randomResultsArray.get(startIndex).setCPUTime(randomResultsArray.
-				get(lastPositionSmallerThanPivot).getCPUTime());
+		randomResultsArray[startIndex].setCPUTime(randomResultsArray[lastPositionSmallerThanPivot].getCPUTime());
 		
-		randomResultsArray.get(lastPositionSmallerThanPivot).setCPUTime(temp);
+		randomResultsArray[lastPositionSmallerThanPivot].setCPUTime(temp);
 		
 		return lastPositionSmallerThanPivot;
 	}
