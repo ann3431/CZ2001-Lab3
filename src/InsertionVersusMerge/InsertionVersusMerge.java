@@ -3,6 +3,7 @@ package InsertionVersusMerge;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.DateFormat;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -34,6 +35,8 @@ public class InsertionVersusMerge
 	 */
 	public static void main(String[] args) throws Exception // dealing with Exceptions is troublesome
 	{
+		long programStartTime = System.currentTimeMillis();
+		
 		/**
 		 * resultsWorkbookArray[0] stores the results of sorting through all randomly-ordered arrays using insertion sort
 		 * resultsWorkbookArray[1] stores the results of sorting through all ascending arrays using insertion sort
@@ -97,10 +100,10 @@ public class InsertionVersusMerge
 			
 			// average and store final result of sorting randomly-ordered array using insertion and merge sort
 			Sorter.quickSort(insertRandomResultsArray,0,NUM_OF_TESTINGS_RANDOM-1);
-			sortingResultsArray[0].setAverageCPUTime(insertRandomResultsArray);
+			sortingResultsArray[0].setAverageCPUTimeAndNumOfKeyCmp(insertRandomResultsArray);
 			
 			Sorter.quickSort(mergeRandomResultsArray,0,NUM_OF_TESTINGS_RANDOM-1);
-			sortingResultsArray[3].setAverageCPUTime(mergeRandomResultsArray);
+			sortingResultsArray[3].setAverageCPUTimeAndNumOfKeyCmp(mergeRandomResultsArray);
 			
 			// generate ascending and descending arrays with insertion and merge sort
 			int[] insertAscendArray = InputGenerator.generateAscendArray(arraySize);
@@ -151,7 +154,28 @@ public class InsertionVersusMerge
 			IOHandler.closeWorkbook(resultsWorkbookArray[index],outputFileNames[index]);
 		}
 		
+		long programEndTime = System.currentTimeMillis();
+		long programTimeTaken = programEndTime - programStartTime;
+		
 		System.out.println("Done");
+		
+		/**
+		 * 1 second = 1000 milliseconds
+		 * 1 minute = 60 seconds
+		 * 1 hour = 60 minutes
+		 */
+		long numOfHoursTaken = programTimeTaken/(60*60*1000);
+		programTimeTaken %= 60*60*1000;
+		
+		long numOfMinTaken = programTimeTaken/(60*1000);
+		programTimeTaken %= 60*1000;
+		
+		long numOfSecTaken = programTimeTaken/1000;
+		
+		System.out.println("Time taken to run entire program: " + 
+							numOfHoursTaken + "h " + 
+							numOfMinTaken + "min " +
+							numOfSecTaken + "s");
 	}
 
 }

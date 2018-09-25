@@ -55,7 +55,7 @@ public class StatisticalResults
 	}
 	
 	/**
-	 * This method sets the average CPU Time for the sorting of a randomly-ordered array by
+	 * This method sets the average number of key comparisons and CPU Time for the sorting of randomly-ordered arrays by
 	 * 1) taking in an ArrayList of Results sorted base on CPU Time (sorted using quickSort())
 	 * 2) removing the top and bottom 25% of results
 	 * 3) finding the average of the middle portion (remaining 50%)
@@ -65,8 +65,9 @@ public class StatisticalResults
 	 * 
 	 * @param randomArrayResults
 	 */
-	public void setAverageCPUTime(StatisticalResults[] randomResultsArray)
+	public void setAverageCPUTimeAndNumOfKeyCmp(StatisticalResults[] randomResultsArray)
 	{
+		long totalNumOfKeyCmp = 0;
 		long totalCPUTime = 0;
 		
 		int TwentyFifthPercentilePosition = randomResultsArray.length/4;
@@ -74,9 +75,11 @@ public class StatisticalResults
 		
 		for(int index = TwentyFifthPercentilePosition; index < SeventyFifthPercentilePosition; ++index)
 		{
+			totalNumOfKeyCmp += randomResultsArray[index].getNumOfKeyCmp();
 			totalCPUTime += randomResultsArray[index].getCPUTime();
 		}
 		
+		this.numOfKeyCmp = totalNumOfKeyCmp/(randomResultsArray.length/2);
 		this.cpuTime = totalCPUTime/(randomResultsArray.length/2);
 	}
 	
