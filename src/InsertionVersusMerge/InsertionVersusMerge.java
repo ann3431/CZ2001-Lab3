@@ -11,8 +11,8 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
- * This class actually runs the program and allow us to compare the performance
- * of Insertion Sort vs Merge Sort
+ * This class actually runs the program and allow us to compare the performance of Insertion Sort vs Merge Sort
+ * 
  * @author Annie, Jason, Kenrick, Lewis, Stephen
  *
  */
@@ -98,6 +98,9 @@ public class InsertionVersusMerge
 							(testingsIndex/(NUM_OF_TESTINGS_RANDOM/10)+1) + " of 10");
 			}
 			
+			/**
+			 * no need to do a number of testings for ascending and descending array
+			 */
 			// average and store final result of sorting randomly-ordered array using insertion and merge sort
 			Sorter.quickSort(insertRandomResultsArray,0,NUM_OF_TESTINGS_RANDOM-1);
 			sortingResultsArray[0].setAverageCPUTimeAndNumOfKeyCmp(insertRandomResultsArray);
