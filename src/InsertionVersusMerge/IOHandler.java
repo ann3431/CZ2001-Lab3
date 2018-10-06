@@ -22,7 +22,7 @@ public class IOHandler
 {
 	// This method prints out large arrays (arraySize >= 10) to the console in a nice format
 	// Let us check if the array is sorted correctly
-	public static void printArray(int[] array)
+	public static void printArray(long[] array)
 	{
 		System.out.println("-----Start of Array-----");
 		

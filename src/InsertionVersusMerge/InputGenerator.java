@@ -35,10 +35,10 @@ public class InputGenerator
 	}
 	
 	// Option 2: Using normal Array object to store integer elements
-	public static int[] generateRandomArray2(int arraySize)
+	public static long[] generateRandomArray2(int arraySize)
 	{
         //    Create an Array object to store the integer elements
-		int[] inputArray = generateAscendArray(arraySize);
+		long[] inputArray = generateAscendArray(arraySize);
 		
 //        int[] inputArray = new int[arraySize];
 //
@@ -74,9 +74,9 @@ public class InputGenerator
 	 * @param arraySize
 	 * @return 
 	 */
-	public static int[] generateAscendArray(int arraySize)
+	public static long[] generateAscendArray(int arraySize)
 	{
-		int[] inputArray = new int[arraySize];
+		long[] inputArray = new long[arraySize];
 		
 		for(int index = 0; index < arraySize; ++index)
 		{
@@ -93,9 +93,9 @@ public class InputGenerator
 	 * @param arraySize
 	 * @return 
 	 */
-	public static int[] generateDescendArray(int arraySize)
+	public static long[] generateDescendArray(int arraySize)
 	{
-		int[] inputArray = new int[arraySize];
+		long[] inputArray = new long[arraySize];
 		
 		for(int index = 0; index < arraySize; ++index)
 		{

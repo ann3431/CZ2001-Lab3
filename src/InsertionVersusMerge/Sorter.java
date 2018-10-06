@@ -1,6 +1,7 @@
 package InsertionVersusMerge;
-import java.math.BigInteger;
-import java.util.ArrayList;
+
+//import java.math.BigInteger;
+//import java.util.ArrayList;
 
 /**
  * This class does the sorting.
@@ -16,9 +17,9 @@ public class Sorter
 	 * @param inputArray
 	 * @param outputResult
 	 */
-	public static void insertionSort(int[] inputArray, StatisticalResults outputResult)
+	public static void insertionSort(long[] inputArray, StatisticalResults outputResult)
 	{
-		int temp; // holds value temporarily during a swap
+		long temp; // holds value temporarily during a swap
 		
 		long startTime = System.nanoTime();
 		
@@ -52,7 +53,7 @@ public class Sorter
 	 * @param endIndex
 	 * @param outputResult
 	 */
-	public static void mergeSort(int[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)
+	public static void mergeSort(long[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)
 	{
 		long startTime = System.nanoTime();
 		
@@ -75,7 +76,7 @@ public class Sorter
 		outputResult.setCPUTime(endTime - startTime);
 	}
 	
-	private static void merge(int[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)
+	private static void merge(long[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)
 	{
 		
 		if(startIndex >= endIndex)
@@ -84,7 +85,7 @@ public class Sorter
 		}
 		else
 		{
-			int[] auxiliaryArray = new int[endIndex - startIndex + 1];
+			long[] auxiliaryArray = new long[endIndex - startIndex + 1];
 
 			int auxiliaryIndex = 0;
 			
@@ -163,27 +164,45 @@ public class Sorter
 	 * @param startIndex
 	 * @param endIndex
 	 */
-	public static void quickSort(StatisticalResults[] randomResultsArray, int startIndex, int endIndex)
+	public static void quickAndInsertionSort(StatisticalResults[] randomResultsArray, int startIndex, int endIndex)
 	{	
-		if(startIndex >= endIndex)
-			return;
+		if((endIndex - startIndex) <= 9) // array is small, do insertion sort
+		{
+			long[] tempArray = new long[endIndex - startIndex + 1];
+			StatisticalResults dummyResult = new StatisticalResults(endIndex - startIndex);
+			
+			for(int index = startIndex; index <= endIndex; ++index)
+			{
+				tempArray[index - startIndex] = randomResultsArray[index].getCPUTime();
+			}
+			
+			insertionSort(tempArray,dummyResult);
+			
+			for(int index = startIndex; index <= endIndex; ++index)
+			{
+				randomResultsArray[index].setCPUTime(tempArray[index - startIndex]);
+			}
+		}
 		else
 		{
 			int pivotPosition = partition(randomResultsArray,startIndex,endIndex);
 			
-			quickSort(randomResultsArray,startIndex,pivotPosition-1);
-			quickSort(randomResultsArray,pivotPosition+1,endIndex);
+			quickAndInsertionSort(randomResultsArray,startIndex,pivotPosition-1);
+			quickAndInsertionSort(randomResultsArray,pivotPosition+1,endIndex);
 		}
 	}
 	
 	private static int partition(StatisticalResults[] randomResultsArray, int startIndex, int endIndex)
 	{
-		int middleIndex = (startIndex + endIndex)/2;
+		int pivotIndex = findMedianIndexAmong3Values(randomResultsArray, startIndex, endIndex);
 		
-		// swap(low,mid) in lecture notes
+		// place pivot value at the start of the array to avoid said pivot when iterating through array
 		long temp = randomResultsArray[startIndex].getCPUTime();
-		randomResultsArray[startIndex].setCPUTime(randomResultsArray[middleIndex].getCPUTime());
-		randomResultsArray[middleIndex].setCPUTime(temp);
+		
+		randomResultsArray[startIndex].setCPUTime(
+				randomResultsArray[pivotIndex].getCPUTime());
+		
+		randomResultsArray[pivotIndex].setCPUTime(temp);
 		
 		long pivotValue = randomResultsArray[startIndex].getCPUTime();
 		int lastPositionSmallerThanPivot = startIndex;
@@ -204,15 +223,74 @@ public class Sorter
 			}
 		}
 		
-		// swap(low,last_small) in lecture notes
+		// place pivot in the right position
+		// visually: [keys smaller than pivot][pivot][keys larger than pivot]
 		temp = randomResultsArray[startIndex].getCPUTime();
 		
-		randomResultsArray[startIndex].setCPUTime(randomResultsArray[lastPositionSmallerThanPivot].getCPUTime());
+		randomResultsArray[startIndex].setCPUTime(
+				randomResultsArray[lastPositionSmallerThanPivot].getCPUTime());
 		
 		randomResultsArray[lastPositionSmallerThanPivot].setCPUTime(temp);
 		
 		return lastPositionSmallerThanPivot;
 	}
 	
+	/**
+	 * This method selects the the median of values of the start, middle and end index of an array as it pivot.
+	 * It is used for selecting the pivot to avoid worst case [O(n^2)]
+	 * 
+	 * @param valueA
+	 * @param valueB
+	 * @param valueC
+	 * @return
+	 */
+	private static int findMedianIndexAmong3Values(StatisticalResults[] randomResultsArray, int startIndex, int endIndex)
+	{
+		int middleIndex = (startIndex + endIndex)/2;
+		
+		long startValue = randomResultsArray[startIndex].getCPUTime();
+		long middleValue = randomResultsArray[middleIndex].getCPUTime();
+		long endValue = randomResultsArray[endIndex].getCPUTime();
+		
+		if(startValue <= middleValue)
+		{
+			if(middleValue <= endValue)
+			{
+				return middleIndex;
+			}
+			else
+			{
+				if(startValue <= endValue)
+				{
+					return endIndex;
+				}
+				else
+				{
+					return startIndex;
+				}
+			}
+		}
+		else
+		{
+			if(endValue <= middleValue)
+			{
+				return middleIndex;
+			}
+			else
+			{
+				if(endValue <= startValue)
+				{
+					return endIndex;
+				}
+				else
+				{
+					return startIndex;
+				}
+			}
+		}
+	}
+	
 	// i should write a swap() method
 }
+
+

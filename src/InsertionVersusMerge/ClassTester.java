@@ -16,7 +16,7 @@ public class ClassTester
 		int arraySize = 20;
 		
 		StatisticalResults insertResult = new StatisticalResults(arraySize);
-		int[] insertTestArray = InputGenerator.generateRandomArray2(arraySize);
+		long[] insertTestArray = InputGenerator.generateRandomArray2(arraySize);
 		
 		System.out.println("Before sorting: ");
 		IOHandler.printArray(insertTestArray);
@@ -31,7 +31,7 @@ public class ClassTester
 		System.out.println();
 		
 		StatisticalResults mergeResult = new StatisticalResults(arraySize);
-		int[] mergeTestArray = InputGenerator.generateRandomArray2(arraySize);
+		long[] mergeTestArray = InputGenerator.generateRandomArray2(arraySize);
 		
 		System.out.println("Before sorting: ");
 		IOHandler.printArray(mergeTestArray);

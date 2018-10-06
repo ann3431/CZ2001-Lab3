@@ -19,7 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class InsertionVersusMerge
 {
 	/**
-	 * this values are declared constants for easy manipulation
+	 * these values are declared constants for easy manipulation
 	 * can be changed to console input later on
 	 */
 	private static final int MIN_ARRAY_SIZE = 1000;
@@ -87,8 +87,8 @@ public class InsertionVersusMerge
 				insertRandomResultsArray[testingsIndex] = new StatisticalResults(arraySize);
 				mergeRandomResultsArray[testingsIndex] = new StatisticalResults(arraySize);
 				
-				int[] insertRandomArray = InputGenerator.generateRandomArray2(arraySize);
-				int[] mergeRandomArray = InputGenerator.generateRandomArray2(arraySize);
+				long[] insertRandomArray = InputGenerator.generateRandomArray2(arraySize);
+				long[] mergeRandomArray = InputGenerator.generateRandomArray2(arraySize);
 				
 				Sorter.insertionSort(insertRandomArray, insertRandomResultsArray[testingsIndex]);
 				Sorter.mergeSort(mergeRandomArray, 0, arraySize-1, mergeRandomResultsArray[testingsIndex]);
@@ -102,18 +102,18 @@ public class InsertionVersusMerge
 			 * no need to do a number of testings for ascending and descending array
 			 */
 			// average and store final result of sorting randomly-ordered array using insertion and merge sort
-			Sorter.quickSort(insertRandomResultsArray,0,NUM_OF_TESTINGS_RANDOM-1);
+			Sorter.quickAndInsertionSort(insertRandomResultsArray,0,NUM_OF_TESTINGS_RANDOM-1);
 			sortingResultsArray[0].setAverageCPUTimeAndNumOfKeyCmp(insertRandomResultsArray);
 			
-			Sorter.quickSort(mergeRandomResultsArray,0,NUM_OF_TESTINGS_RANDOM-1);
+			Sorter.quickAndInsertionSort(mergeRandomResultsArray,0,NUM_OF_TESTINGS_RANDOM-1);
 			sortingResultsArray[3].setAverageCPUTimeAndNumOfKeyCmp(mergeRandomResultsArray);
 			
 			// generate ascending and descending arrays with insertion and merge sort
-			int[] insertAscendArray = InputGenerator.generateAscendArray(arraySize);
-			int[] insertDescendArray = InputGenerator.generateDescendArray(arraySize);
+			long[] insertAscendArray = InputGenerator.generateAscendArray(arraySize);
+			long[] insertDescendArray = InputGenerator.generateDescendArray(arraySize);
 			
-			int[] mergeAscendArray = InputGenerator.generateAscendArray(arraySize);
-			int[] mergeDescendArray = InputGenerator.generateDescendArray(arraySize);
+			long[] mergeAscendArray = InputGenerator.generateAscendArray(arraySize);
+			long[] mergeDescendArray = InputGenerator.generateDescendArray(arraySize);
 
 			// sort ascending and descending arrays with insertion and merge sort
 			Sorter.insertionSort(insertAscendArray, sortingResultsArray[1]);
