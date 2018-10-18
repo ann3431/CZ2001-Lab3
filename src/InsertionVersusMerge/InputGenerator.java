@@ -5,7 +5,8 @@ import java.util.Collections;
 import java.util.Random;
 
 /**
- * This class generates the arrays to be sorted through.
+ * This class generates the input arrays to be sorted through.
+ * last-updated: 2018-10-18
  * 
  * @author Lewis
  *
@@ -13,11 +14,10 @@ import java.util.Random;
 public class InputGenerator
 {
 	/**
-	 * These 2 methods generates an array with elements in random positions.
-	 * Sort through a number of times for the average case.
+	 * These 2 methods each generate an array with elements in random positions.
 	 * 
 	 * @param arraySize
-	 * @return
+	 * @return array of random order
 	 */
 	// Option 1: Using ArrayList object to store integer elements
 	public static ArrayList<Integer> generateRandomArray1(int arraySize)
@@ -39,12 +39,6 @@ public class InputGenerator
 	{
         //    Create an Array object to store the integer elements
 		long[] inputArray = generateAscendArray(arraySize);
-		
-//        int[] inputArray = new int[arraySize];
-//
-//        for(int index = 0; index < arraySize; index++){
-//            inputArray[index] = index + 1;
-//        }
 
         //    Generate randomly ordered array by implementing Fisher-Yates shuffle algorithm
         int index;
@@ -69,10 +63,9 @@ public class InputGenerator
 	
 	/**
 	 * This method generates an array sorted in ascending order.
-	 * Also the best case.
 	 * 
 	 * @param arraySize
-	 * @return 
+	 * @return array of ascending order
 	 */
 	public static long[] generateAscendArray(int arraySize)
 	{
@@ -88,10 +81,9 @@ public class InputGenerator
 	
 	/**
 	 * This method generates an array sorted in descending order.
-	 * Also the worst case.
 	 * 
 	 * @param arraySize
-	 * @return 
+	 * @return array of descending order
 	 */
 	public static long[] generateDescendArray(int arraySize)
 	{

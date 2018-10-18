@@ -1,27 +1,28 @@
 package InsertionVersusMerge;
 
-//import org.apache.commons.csv.*;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Scanner;
 
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * This class does everything IO-related, be it printing to console, writing to file etc
+ * last-updated: 2018-10-18
  * 
  * @author Jason
  *
  */
 public class IOHandler
 {
-	// This method prints out large arrays (arraySize >= 10) to the console in a nice format
-	// Let us check if the array is sorted correctly
+	/**
+	 * This method prints out large arrays (arraySize >= 10) to the console in a nice format.
+	 * Let us check if the array is sorted correctly.
+	 * 
+	 * @param array
+	 */
 	public static void printArray(long[] array)
 	{
 		System.out.println("-----Start of Array-----");
@@ -35,16 +36,19 @@ public class IOHandler
 	}
 	
 	/**
-	 * This method generates a new XSSF WorkBook.
-	 * In each Workbook, there are 3 columns that record the array size, number of key comparisons and CPU time.
+	 * This method generates a new, blank XSSF Workbook for storing 3 sets of output data in 3 columns:
+	 * the first column records the array size,
+	 * the second column records number of key comparisons for sorting an array of the size in the first column and 
+	 * the third column records CPU time taken for sorting an array of the size in the first column.
+	 * 
+	 * Provides headers for the columns too.
+	 * This XSSF Workbook would be output as an Excel file after storing output data.
 	 * 
 	 * @param fileName
-	 * @return 
-	 * @throws InvalidFormatException 
-	 * @throws EncryptedDocumentException 
+	 * @return blank XSSF Workbook that is formatted nicely
 	 */
 	public static XSSFWorkbook generateNewXSSFWorkbook() 
-			throws EncryptedDocumentException, InvalidFormatException
+//			throws EncryptedDocumentException, InvalidFormatException
 	{
 		// create a new WorkBook (the main Excel file)
 		XSSFWorkbook newWorkBook = new XSSFWorkbook();
@@ -82,9 +86,11 @@ public class IOHandler
 	}
 	
 	/**
-	 * Transfer results of sorting stored in outputResults to workbook (Excel file), which would be used for graphing
+	 * Copies results of sorting stored in a StatisticalResults object to 
+	 * a XSSFWorkbook, which would be output as an Excel file..
+	 * 
 	 * @param outputResults
-	 * @param workbook
+	 * @param resultsWorkbook
 	 */
 	public static void transferResultsToWorkbook(StatisticalResults outputResults, XSSFWorkbook resultsWorkbook)
 	{
@@ -113,7 +119,15 @@ public class IOHandler
 		cpuTimeCell.setCellStyle(dataCellStyle);
 	}
 	
-	public static void closeWorkbook(XSSFWorkbook resultsWorkbook, String fileName) throws Exception
+	/**
+	 * This method formats the columns to be the right sizes,
+	 * then output the XSSFWorkbook as an Excel file before closing the it.
+	 * 
+	 * @param resultsWorkbook
+	 * @param fileName
+	 * @throws Exception
+	 */
+	public static void writeWorkbookToExcel(XSSFWorkbook resultsWorkbook, String fileName)
 	{
 		Sheet resultsSheet = resultsWorkbook.getSheetAt(0);
 		
@@ -124,10 +138,31 @@ public class IOHandler
 		
 		// actual transfer of output data
 		File fileOut = new File(fileName);
-		FileOutputStream fileOutStream = new FileOutputStream(fileOut);
-		resultsWorkbook.write(fileOutStream);
-		fileOutStream.close();
 		
-		resultsWorkbook.close();
+		Scanner sc = new Scanner(System.in);
+		while (true) 
+		{
+			try 
+			{
+				FileOutputStream fileOutStream = new FileOutputStream(fileOut);
+				resultsWorkbook.write(fileOutStream);
+				
+				// close output stream and workbook
+				fileOutStream.close();
+				resultsWorkbook.close();
+			    break;
+			} 
+			catch (IOException e ) 
+			{
+				System.out.println("The excel file you are trying to write data to is opened.\n"
+								 + "Please close the excel file before entering a value to continue.");
+				
+				
+				if(sc.hasNext())
+					sc.nextLine();
+			}
+		}
+		
+		sc.close();
 	}
 }

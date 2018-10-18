@@ -1,6 +1,7 @@
 package InsertionVersusMerge;
 /**
  * This class is used to make sure other classes and their methods are working properly.
+ * last-updated: 2018-10-18
  * 
  * @author Jason
  *
@@ -8,7 +9,8 @@ package InsertionVersusMerge;
 public class ClassTester
 {
 	/**
-	 * This stuff here before adding them to the main program so you won't break things.
+	 * Test stuff here before adding them to the main program so you won't break things.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args)

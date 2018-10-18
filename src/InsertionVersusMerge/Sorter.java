@@ -1,10 +1,8 @@
 package InsertionVersusMerge;
 
-//import java.math.BigInteger;
-//import java.util.ArrayList;
-
 /**
- * This class does the sorting.
+ * This class sorts arrays.
+ * last-updated: 2018-10-18
  * 
  * @author Jason
  *
@@ -57,11 +55,11 @@ public class Sorter
 	{
 		long startTime = System.nanoTime();
 		
-		if(startIndex >= endIndex)
+		if(startIndex >= endIndex) // base case
 		{
 			return;
 		}
-		else
+		else // recursive step
 		{
 			int midIndex = (startIndex + endIndex)/2;
 			
@@ -76,10 +74,19 @@ public class Sorter
 		outputResult.setCPUTime(endTime - startTime);
 	}
 	
+	/**
+	 * This method does the merging in merge sort.
+	 * Intermediate merge result is stored in an auxiliary array instead of merging in place.
+	 * 
+	 * @param inputArray
+	 * @param startIndex
+	 * @param endIndex
+	 * @param outputResult
+	 */
 	private static void merge(long[] inputArray, int startIndex, int endIndex, StatisticalResults outputResult)
 	{
 		
-		if(startIndex >= endIndex)
+		if(startIndex >= endIndex) // another base case in case previous base case failed?
 		{
 			return;
 		}
@@ -89,16 +96,19 @@ public class Sorter
 
 			int auxiliaryIndex = 0;
 			
+			// first "subarray"
 			int firstHead = startIndex;
 			int firstTail = (startIndex + endIndex)/2;
 			
+			// second "subarray"
 			int secondHead = firstTail + 1;
 			int secondTail = endIndex;
 
+			// merging is done while neither subarrays have reached its end
 			while(firstHead <= firstTail && secondHead <= secondTail)
 			{
 				outputResult.incrementNumOfKeyCmp(); // if statement below is the key comparison
-				
+
 				if(inputArray[firstHead] < inputArray[secondHead])
 				{
 					auxiliaryArray[auxiliaryIndex] = inputArray[firstHead];
@@ -117,6 +127,7 @@ public class Sorter
 						break;
 					}
 					
+					// both keys are equal in value
 					auxiliaryArray[auxiliaryIndex] = inputArray[firstHead];
 					++firstHead;
 
@@ -129,9 +140,7 @@ public class Sorter
 				++auxiliaryIndex;
 			}
 			
-			/**
-			 * if there are any remaining elements to be merged, merge them
-			 */
+			// if there are any remaining elements to be merged, merge them into the auxiliary array directly.
 			if(firstHead <= firstTail)
 			{
 				for(int index = firstHead; index <= firstTail; ++index)
@@ -158,7 +167,8 @@ public class Sorter
 	}
 	
 	/**
-	 * This method is used for sorting results of sorting through randomly-ordered array.
+	 * This method is used for sorting results of doing Insertion or Merge Sort on randomly-ordered array.
+	 * These results have to be sorted in order to find interquartile mean. 
 	 * 
 	 * @param randomResultsArray
 	 * @param startIndex
@@ -183,7 +193,7 @@ public class Sorter
 				randomResultsArray[index].setCPUTime(tempArray[index - startIndex]);
 			}
 		}
-		else
+		else // array is big enough, do quick sort
 		{
 			int pivotPosition = partition(randomResultsArray,startIndex,endIndex);
 			
@@ -192,6 +202,16 @@ public class Sorter
 		}
 	}
 	
+	/**
+	 * This method does the partition the array into two portions:
+	 * 1. elements smaller than pivot
+	 * 2. elements larger than pivot
+	 * 
+	 * @param randomResultsArray
+	 * @param startIndex
+	 * @param endIndex
+	 * @return pivot's position
+	 */
 	private static int partition(StatisticalResults[] randomResultsArray, int startIndex, int endIndex)
 	{
 		int pivotIndex = findMedianIndexAmong3Values(randomResultsArray, startIndex, endIndex);
@@ -239,10 +259,9 @@ public class Sorter
 	 * This method selects the the median of values of the start, middle and end index of an array as it pivot.
 	 * It is used for selecting the pivot to avoid worst case [O(n^2)]
 	 * 
-	 * @param valueA
-	 * @param valueB
-	 * @param valueC
-	 * @return
+	 * @param startIndex
+	 * @param endIndex
+	 * @return pivot value
 	 */
 	private static int findMedianIndexAmong3Values(StatisticalResults[] randomResultsArray, int startIndex, int endIndex)
 	{

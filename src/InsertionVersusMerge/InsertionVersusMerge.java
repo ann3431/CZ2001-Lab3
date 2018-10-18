@@ -1,17 +1,10 @@
 package InsertionVersusMerge;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.text.DateFormat;
-
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * This class actually runs the program and allow us to compare the performance of Insertion Sort vs Merge Sort
+ * last-updated: 2018-10-18
  * 
  * @author Annie, Jason, Kenrick, Lewis, Stephen
  *
@@ -19,8 +12,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class InsertionVersusMerge
 {
 	/**
-	 * these values are declared constants for easy manipulation
-	 * can be changed to console input later on
+	 * These values are declared constants for easy manipulation.
+	 * They can be changed to console input later on
 	 */
 	private static final int MIN_ARRAY_SIZE = 1000;
 	private static final int MAX_ARRAY_SIZE = 50_000;
@@ -28,12 +21,7 @@ public class InsertionVersusMerge
 	
 	private static final int NUM_OF_TESTINGS = 60;
 	
-	/**
-	 * We need to compare between insertion sort and merge sort for arrays of different types and sizes.
-	 * So we generate 
-	 * @param args
-	 */
-	public static void main(String[] args) throws Exception // dealing with Exceptions is troublesome
+	public static void main(String[] args) /*throws Exception*/
 	{
 		long programStartTime = System.currentTimeMillis();
 		
@@ -174,7 +162,7 @@ public class InsertionVersusMerge
 			
 			outputFileNames[index] += " Array Results.xlsx";
 			
-			IOHandler.closeWorkbook(resultsWorkbookArray[index],outputFileNames[index]);
+			IOHandler.writeWorkbookToExcel(resultsWorkbookArray[index],outputFileNames[index]);
 		}
 		
 		long programEndTime = System.currentTimeMillis();

@@ -1,11 +1,9 @@
 package InsertionVersusMerge;
 
-import org.apache.poi.ss.usermodel.*;
-import java.util.ArrayList;
-
 /**
  * This class holds the results of sorting through an array,
  * results being the number of key comparisons and CPU time taken for sorting
+ * last-updated: 2018-10-18
  * 
  * @author Jason
  *
