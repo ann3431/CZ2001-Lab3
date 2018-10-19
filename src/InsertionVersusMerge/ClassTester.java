@@ -9,7 +9,7 @@ package InsertionVersusMerge;
 public class ClassTester
 {
 	/**
-	 * Test stuff here before adding them to the main program so you won't break things.
+	 * Classes and methods are tested here before being used in the main method of InsertionVersusMerge
 	 * 
 	 * @param args
 	 */

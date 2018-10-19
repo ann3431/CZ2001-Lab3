@@ -10,7 +10,7 @@ package InsertionVersusMerge;
 public class Sorter
 {
 	/**
-	 * Insertion sort as shown in lecture.
+	 * This method performs insertion sort as shown in lecture.
 	 * 
 	 * @param inputArray
 	 * @param outputResult
@@ -44,7 +44,9 @@ public class Sorter
 	}
 	
 	/**
-	 * Merge sort, but stores merge result in an auxiliary array instead of doing the merging in the original array.
+	 * This method performs merge sort.
+	 * It stores merge result in an auxiliary array 
+	 * instead of doing the merging in the original array (lecture's version).
 	 * 
 	 * @param inputArray
 	 * @param startIndex
@@ -76,7 +78,7 @@ public class Sorter
 	
 	/**
 	 * This method does the merging in merge sort.
-	 * Intermediate merge result is stored in an auxiliary array instead of merging in place.
+	 * The intermediate sorted keys are stored in an auxiliary array instead of merging in place.
 	 * 
 	 * @param inputArray
 	 * @param startIndex
@@ -104,7 +106,7 @@ public class Sorter
 			int secondHead = firstTail + 1;
 			int secondTail = endIndex;
 
-			// merging is done while neither subarrays have reached its end
+			// merging is done while either subarrays have keys to be merged
 			while(firstHead <= firstTail && secondHead <= secondTail)
 			{
 				outputResult.incrementNumOfKeyCmp(); // if statement below is the key comparison
@@ -127,7 +129,7 @@ public class Sorter
 						break;
 					}
 					
-					// both keys are equal in value
+					// both keys are equal in value, so copy them to the auxiliary array together
 					auxiliaryArray[auxiliaryIndex] = inputArray[firstHead];
 					++firstHead;
 
@@ -168,7 +170,7 @@ public class Sorter
 	
 	/**
 	 * This method is used for sorting results of doing Insertion or Merge Sort on randomly-ordered array.
-	 * These results have to be sorted in order to find interquartile mean. 
+	 * The sorting results mentioned above have to be sorted in order to find interquartile mean. 
 	 * 
 	 * @param randomResultsArray
 	 * @param startIndex
@@ -203,7 +205,7 @@ public class Sorter
 	}
 	
 	/**
-	 * This method does the partition the array into two portions:
+	 * This method partitions the array into two portions:
 	 * 1. elements smaller than pivot
 	 * 2. elements larger than pivot
 	 * 

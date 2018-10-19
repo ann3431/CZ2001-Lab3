@@ -21,6 +21,11 @@ public class InsertionVersusMerge
 	
 	private static final int NUM_OF_TESTINGS = 60;
 	
+	/**
+	 * This main method runs the actual program.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) /*throws Exception*/
 	{
 		long programStartTime = System.currentTimeMillis();

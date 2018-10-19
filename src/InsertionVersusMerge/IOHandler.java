@@ -86,7 +86,7 @@ public class IOHandler
 	}
 	
 	/**
-	 * Copies results of sorting stored in a StatisticalResults object to 
+	 * This method copies results of sorting stored in a StatisticalResults object to 
 	 * a XSSFWorkbook, which would be output as an Excel file..
 	 * 
 	 * @param outputResults
