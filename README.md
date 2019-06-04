@@ -1,7 +1,9 @@
 # CZ2001 Lab3
 
 Lab group: SE1
+
 Group number: 2
+
 Group members: Stephen, Lewis, Kenrick, Jason and Annie
 
 Completed in NTU Year 2018 Semester 1
