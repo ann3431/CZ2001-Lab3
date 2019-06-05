@@ -1,6 +1,6 @@
 # CZ2001 Lab3
 
-This project is done in AY2018 S1 for NTU SCSE CZ2001 Algorithms Lab 3.
+This project is done in AY2018-19 S1 for NTU SCSE CE2001/CZ2001 Algorithms Lab 3.
 
 Lab group: SE1
 
