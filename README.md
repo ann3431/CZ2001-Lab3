@@ -1,12 +1,12 @@
 # CZ2001 Lab3
 
+This project is done in AY2018 S1 for NTU SCSE CZ2001 Algorithms Lab 3.
+
 Lab group: SE1
 
 Group number: 2
 
 Group members: Stephen, Lewis, Kenrick, Jason and Annie
-
-Completed in NTU Year 2018 Semester 1
 
 Description of program:
 An empirical comparison of insertion sort versus merge sort based on number of key comparisons and CPU time taken
